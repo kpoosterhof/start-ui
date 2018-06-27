@@ -1,5 +1,6 @@
 import {MovieService} from '../../services/movie.service';
 import {Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,14 @@ import {Component, OnInit} from '@angular/core';
 export class HomeComponent implements OnInit {
   public movie;
 
-  constructor(private mv: MovieService) {}
+  constructor(private movieService: MovieService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.getMovie();
+    this.getMovie(this.route.snapshot.params.id);
   }
 
-  getMovie() {
-    this.mv.getMovie().subscribe(
+  getMovie(id: number) {
+    this.movieService.getMovie(id).subscribe(
       data => {this.movie = data},
       err => console.error(err),
       () => console.log('movie loaded')
