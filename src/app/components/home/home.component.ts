@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   getMovie(id: number) {
     this.movieService.getMovie(id).subscribe(
-      data => {this.movie = data;},
+      data => {this.movie = data},
       err => console.error(err),
       () => console.log('movie loaded')
     );
